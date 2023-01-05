@@ -27,11 +27,12 @@ const Main = () => {
 
         }
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/library'>Library</Link></li>
         {
             user && user.uid ?
                 <li className='flex place-items-center'><button onClick={() => logout()} className='btn btn-sm bg-violet-800 hover:bg-violet-900 flex place-items-center rounded font-semibold text-gray-100'><p>Log out</p></button></li> :
+              <>
                 <li><Link to='/signup'>sign up</Link></li>
+              </>
         }
     </>
     if (loading) { return <p>loading...</p > }
@@ -41,7 +42,7 @@ const Main = () => {
                 <div className="drawer">
                     <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content flex flex-col">
-                        <div className="w-full navbar">
+                        <div className="w-full navbar shadow-xl shadow-violet-800">
                             <div className="flex-none lg:hidden">
                                 <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -49,7 +50,7 @@ const Main = () => {
                             </div>
                             <div className="flex-1 px-2 mx-2 flex">
                                 <img src={logo} alt="" className='mx-1' />
-                                <h2 className='uppercase'>AMAR Library</h2>
+                                <h2 className='uppercase'>food recipes</h2>
                             </div>
                             <div className="flex-none hidden lg:block">
                                 <ul className="menu menu-horizontal uppercase place-items-center">

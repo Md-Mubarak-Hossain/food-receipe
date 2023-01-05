@@ -4,9 +4,7 @@ import Home from '../pages/Home/Home';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Signup from '../account/Signup';
 import Login from '../account/Login';
-import Library from '../pages/library/Library';
 import Protect from './Protect';
-import Start from '../pages/library/Start';
 import Demo from '../Demo/Demo';
 const Router = () => {
     const router = createBrowserRouter([
@@ -17,7 +15,7 @@ const Router = () => {
                 {
                     path: '/',
                     element: <Home></Home>,
-                    loader: () => fetch('https://library-psi.vercel.app/paper')
+                    loader: () => fetch('https://food-server-three.vercel.app/recipes')
 
                 },
                 {
@@ -28,29 +26,22 @@ const Router = () => {
                 {
                     path: '/login',
                     element: <Login></Login>,
-                    loader: () => fetch('https://library-psi.vercel.app/creator')
+                    loader: () => fetch('https://food-server-three.vercel.app/users')
 
                 },
                 {
                     path: '/demo',
                     element: <Demo></Demo>,
-                    loader: () => fetch('https://library-psi.vercel.app/creator')
+                    loader: () => fetch('https://food-server-three.vercel.app/recipes')
 
                 },
                 {
                     path: '/login/:id',
                     element: <Login></Login>,
-                    loader: ({ params }) => fetch(`https://library-psi.vercel.app/creator/${params.id}`)
+                    loader: ({ params }) => fetch(`https://food-server-three.vercel.app/users/${params.id}`)
 
                 },
-                {
-                    path: '/start',
-                    element: <Start></Start>
-                },
-                {
-                    path: '/library',
-                    element: <Protect> <Library></Library></Protect>
-                },
+               
             ]
         },
         {

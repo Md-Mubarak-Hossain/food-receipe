@@ -5,7 +5,7 @@ import { AuthContext } from '../contexts/Context';
 import useTitle from '../hooks/useTitle';
 
 const Signup = () => {
-    useTitle('signup')
+    useTitle('sign up')
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.from?.state?.pathname || '/';
@@ -31,7 +31,7 @@ const Signup = () => {
                 const userInfo = {
                     email, password
                 }
-                fetch('https://library-psi.vercel.app/creator', {
+                fetch('https://food-server-three.vercel.app/recipes', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -97,13 +97,13 @@ const Signup = () => {
                             </label>
                             <div className="form-control w-64 mt-6">
                                 <button className="btn bg-violet-600 hover:bg-violet-900 uppercase">Sign Up</button>
-                                <p className='text-xs'>already have an account <Link to='/login' className='link active-link active text-primary'>sign in</Link></p>
+                                <p className='text-sm mt-2 justify-start text-justify'>already have an account <Link to='/login' className='link active-link active text-primary'>sign in</Link></p>
                             </div>
                         </div>
                     </div>
                 </form>
                 <div className='divider horizontal-divider mb-1'>or</div>
-                <button onClick={() => googleSign()} className="btn btn-outline hover:bg-violet-800 w-64">log in with google</button>
+                <button onClick={() => googleSign()} className="btn btn-outline hover:bg-violet-800 w-64">sign in with google</button>
             </div >
         </div >
     );

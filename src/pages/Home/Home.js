@@ -1,37 +1,26 @@
 import React, { useContext, useState } from 'react';
 import Login from '../../account/Login';
 import { AuthContext } from '../../contexts/Context';
-import Video from '../contents/Video';
-import Start from '../library/Start';
-import Sidebar from './Sidebar';
+import Recipes from './Recipes';
 
 const Home = () => {
     const { user } = useContext(AuthContext)
-    const[content,setContent]=useState(<Video></Video>)
     return (
         <div>
-            <div className="drawer drawer-mobile flex">
-                <div className="drawer-side  px-5">
+            <div className="flex">
+                <div className="">
                     {
                         user && user.uid ?
-                            <Sidebar setContent={setContent}></Sidebar>
+                            <></>
                             :
-                            <Login></Login>
+                           <div className='w-1/5 px-5 border-r'>
+                             <Login></Login>
+                           </div>
                     }
                 </div>
-                <div className="drawer-content flex flex-col  text-justify p-10 w-full bg-violet-900 text-gray-100 overflow-y-scroll">
-                 
-                    {/* <!-- Page content here --> */}
-                    {
-                        user && user.uid ?
-                           <div>
-                           {content}
-                           </div>
-                            :
-                            <div className='w-full h-screen'>
-                                <Start></Start>
-                            </div>
-                    }
+                <div className="flex flex-col  text-justify p-5 ">
+                          <Recipes></Recipes>
+                           
                 </div>
 
             </div>

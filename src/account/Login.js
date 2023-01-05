@@ -5,7 +5,7 @@ import { AuthContext } from '../contexts/Context';
 import useTitle from '../hooks/useTitle';
 
 const Login = () => {
-    useTitle('Login')
+    useTitle('Sign in')
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.from?.state?.pathname || '/';
@@ -50,7 +50,7 @@ const Login = () => {
     return (
         <div className='w-full flex flex-col justify-center items-center place-items-center'>
             <div className="card flex-shrink-0 w-full max-w-sm  flex flex-col justify-center items-center place-items-center y-10 py-5">
-                <h2 className='uppercase lg:text-xl'>log in form</h2>
+                <h2 className='uppercase lg:text-xl'>Sign in form</h2>
                 <form onSubmit={handleSub}>
                     <div className="hero">
                         <div className="hero-content flex-col">
@@ -69,15 +69,15 @@ const Login = () => {
                                     <p className='text-xs text-error'>{error}</p>
                                 </label>
                             </div>
-                            <div className="form-control w-64 mt-6">
-                                <button className="btn bg-violet-600 hover:bg-violet-900 uppercase">log in</button>
-                                <p className='text-xs'>Don't have an account?<Link to='/signup' className='link active-link active text-primary'>sign up</Link></p>
+                            <div className="form-control w-64 mt-2">
+                                <button className="btn bg-violet-600 hover:bg-violet-900 uppercase">Sign in</button>
+                                <p className='text-sm mt-2 justify-start text-justify'>Don't have an account?<Link to='/signup' className='link active-link active text-primary'>sign up</Link></p>
                             </div>
                         </div>
                     </div>
                 </form>
                 <div className='divider horizontal-divider mb-1'>or</div>
-                <button onClick={() => googleSign()} className="btn btn-outline hover:bg-violet-800 w-64">log in with google</button>
+                <button onClick={() => googleSign()} className="btn btn-outline hover:bg-violet-800 w-64">Sign in with google</button>
             </div>
         </div>
     );

@@ -4,9 +4,10 @@ import { AuthContext } from '../contexts/Context';
 import Footer from '../pages/shared/Footer';
 import logo from '../components/assets/logo.png';
 import { BsSun, BsMoon } from 'react-icons/bs';
+import {HiShoppingCart} from 'react-icons/hi';
 const Main = () => {
-    const { user, logOut, loading } = useContext(AuthContext)
-    const [them, setThem] = useState('night')
+    const { user, logOut, loading,shop } = useContext(AuthContext)
+    const [them, setThem] = useState('light')
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.from?.state?.pathname || '/'
@@ -19,17 +20,20 @@ const Main = () => {
             .catch(err => console.error(err))
     }
     const menu = <>
+
         {
             them === 'night' ?
-                <li className=' justify-center items-center place-items-center'><button onClick={() => setThem('light')} className='w-full btn btn-outline btn-white  justify-center items-center place-items-center rounded-3xl  bg-white block'><BsSun className='text-red-800 text-lg'></BsSun></button></li>
+                <button onClick={() => setThem('light')} className=' btn btn-outline btn-white  justify-center items-center place-items-center rounded-3xl  bg-white block'><BsSun className='text-red-800 text-lg'></BsSun></button>
                 :
-                <li className=' justify-center items-center place-items-center'><button onClick={() => setThem('night')} className='w-full btn btn-outline btn-white  justify-center items-center place-items-center rounded-3xl  bg-black block'><BsMoon className='font-bold text-white text-lg'></BsMoon></button></li >
+                <button onClick={() => setThem('night')} className='btn btn-outline btn-white  justify-center items-center place-items-center rounded-3xl  bg-black block'><BsMoon className='font-bold text-white text-lg'></BsMoon></button>
 
         }
         <li><Link to='/'>Home</Link></li>
+        <li><Link to='/shop' className='flex'><HiShoppingCart className='text-xl text-orange-600 relative block'></HiShoppingCart><p className='text-blue-900 font-bold absolute  top-0 right-1 mx-0'>{shop}</p></Link></li>
         {
             user && user.uid ?
-                <li className='flex place-items-center'><button onClick={() => logout()} className='btn btn-sm bg-violet-800 hover:bg-violet-900 flex place-items-center rounded font-semibold text-gray-100'><p>Log out</p></button></li> :
+                <button onClick={() => logout()} className="btn btn-primary btn-md">Log out</button>
+                :
               <>
                 <li><Link to='/signup'>sign up</Link></li>
               </>
@@ -42,7 +46,7 @@ const Main = () => {
                 <div className="drawer">
                     <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content flex flex-col">
-                        <div className="w-full navbar shadow-xl shadow-violet-800">
+                        <div className="w-full navbar shadow-lg shadow-violet-800">
                             <div className="flex-none lg:hidden">
                                 <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>

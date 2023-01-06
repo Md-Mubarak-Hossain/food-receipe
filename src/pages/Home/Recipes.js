@@ -1,20 +1,75 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Context';
-
 const Recipes = () => {
     const{loading}=useContext(AuthContext)
     const[recipes,setRecipes]=useState([])
+    const[recipe,setRecipe]=useState([])
+   
     useEffect(()=>{
         fetch('https://food-server-three.vercel.app/recipes')
         .then(res=>res.json())
         .then(result=>{
             setRecipes(result)
-            console.log(result)
+            // console.log(result)
         })
       
     },[])
-    console.log(recipes)
-    if(loading){return<p>loading...</p>}
+const hanleAdd=(id)=>{
+        fetch(`https://food-server-three.vercel.app/recipes/${id}`)
+        .then(res=>res.json())
+        .then(result=>{
+            setRecipe(result)
+            // console.log(result)
+        })
+      
+    const strMeal=recipe.strMeal;
+    const strMealThumb=recipe.strMealThumb;
+    const strCategory=recipe.strCategory;
+    const strIngredient1=recipe.strIngredient1;
+    const strIngredient2=recipe.strIngredient2;
+    const strIngredient3=recipe.strIngredient3;
+    const strIngredient4=recipe.strIngredient4;
+    const strIngredient5=recipe.strIngredient5;
+    const strIngredient6=recipe.strIngredient6;
+    const strInstructions=recipe.strInstructions;
+    const strMeasure1=recipe.strMeasure1;
+    const strMeasure2=recipe.strMeasure2;
+    const strMeasure3=recipe.strMeasure3;
+    const strMeasure4=recipe.strMeasure4;
+    const strMeasure5=recipe.strMeasure5;
+    const strMeasure6=recipe.strMeasure6;
+    const strSource=recipe.strSource;
+    const strTags=recipe.strTags;
+    const strYoutube=recipe.strYoutube;
+    const orderPost={
+    strMeal,strMealThumb,strCategory,strIngredient1,strIngredient2,strIngredient3,
+    strIngredient4,strIngredient5,strIngredient6,
+    strInstructions,
+    strMeasure1,strMeasure2,strMeasure3,strMeasure4,strMeasure5,strMeasure6,
+    strSource,strTags,strYoutube,
+    }
+    // console.log(orderPost)
+    fetch('https://food-server-three.vercel.app/orders',{
+        method:'POST',
+headers:{
+    'content-type':'application/json'
+},
+body:JSON.stringify(orderPost)
+})
+    .then(res=>res.json())
+    .then(result=>{
+        console.log(result)
+        if(result.acknowledged){
+            alert('The recipe added successfully')
+        }
+    })
+
+
+
+}
+    // console.log(recipes)
+    if(loading){return <p>loading...</p>}
     return (
        <>
         <div className='flex flex-col justify-center items-center place-items-center'>
@@ -30,16 +85,16 @@ const Recipes = () => {
                  </div>
             </div>
         </div>
-        <div className='grid grid-cols-4 gap-4'>
-            { recipes.map(recipe=><div key={recipe._id} className="hover:bg-base-200 hover:shadow-2xl shadow-violet-800 p-5 hover:p-0">
-             <figure> <img src={recipe.strMealThumb} alt="" className=''/></figure>
+        <div className='grid grid-cols-4 gap-4 w-full'>
+            { recipes.map(recipe=><div key={recipe._id} className="hover:shadow-2xl shadow-violet-800 p-5 hover:p-0">
+                <img src={recipe.strMealThumb} alt="" className='p-3'/>
                 <div className="p-1">
                     <h2 className="text-xl font-bold">
-                        {recipe?.strMeal.slice(0,20)}
+                        {recipe?.strMeal.slice(0,15)}
                     </h2>
-                    <p>{recipe?.strInstructions.slice(0,200)}</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
+                    <div className='flex'>
+                        <button className="btn btn-primary mx-2"><Link to={`details/${recipe._id}`}>See Details</Link></button>
+                        <button onClick={()=>hanleAdd(recipe._id)} className="btn btn-primary">Add to cart</button>
                     </div>
                 </div>
             </div>)}

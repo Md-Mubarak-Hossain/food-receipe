@@ -1,28 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/Context';
+import Shop from '../shop/Shop';
+
+
 const Recipes = () => {
-    const{loading}=useContext(AuthContext)
+    const{loading,user}=useContext(AuthContext)
     const[recipes,setRecipes]=useState([])
     const[recipe,setRecipe]=useState([])
-    // const[matched,setMatched]=useState(recipes)
+
     useEffect(()=>{
         fetch('https://food-server-three.vercel.app/recipes')
         .then(res=>res.json())
         .then(result=>{
             setRecipes(result)
-            // console.log(result)
         })
       
     },[])
 
-    
-console.log(recipes,recipes.length)
-
-
 const handleSub=(e)=>{
-e.preventDefault()
-let search=e.target.search.value;
+    e.preventDefault()
+    let search=e.target.search.value;
 
     fetch('https://food-server-three.vercel.app/recipes')
     .then(res=>res.json())
@@ -32,20 +30,17 @@ let search=e.target.search.value;
         console.log(p)
         setRecipes(p)
         recipes();
-        
-        console.log(search)
     })
-  
-
 }
-const hanleAdd=(id)=>{
+
+const handleAdd=(id)=>{
         fetch(`https://food-server-three.vercel.app/recipes/${id}`)
         .then(res=>res.json())
         .then(result=>{
             setRecipe(result)
-            // console.log(result)
         })
       
+    const email=user.email;
     const strMeal=recipe.strMeal;
     const strMealThumb=recipe.strMealThumb;
     const strCategory=recipe.strCategory;
@@ -65,33 +60,32 @@ const hanleAdd=(id)=>{
     const strSource=recipe.strSource;
     const strTags=recipe.strTags;
     const strYoutube=recipe.strYoutube;
+  
     const orderPost={
-    strMeal,strMealThumb,strCategory,strIngredient1,strIngredient2,strIngredient3,
+    email,strMeal,strMealThumb,strCategory,strIngredient1,strIngredient2,strIngredient3,
     strIngredient4,strIngredient5,strIngredient6,
     strInstructions,
     strMeasure1,strMeasure2,strMeasure3,strMeasure4,strMeasure5,strMeasure6,
-    strSource,strTags,strYoutube,
+    strSource,strTags,strYoutube
     }
-    // console.log(orderPost)
+   
     fetch('https://food-server-three.vercel.app/orders',{
         method:'POST',
-headers:{
-    'content-type':'application/json'
-},
-body:JSON.stringify(orderPost)
-})
+        headers:{
+                    'content-type':'application/json'
+                },
+        body:JSON.stringify(orderPost)
+                })
     .then(res=>res.json())
     .then(result=>{
         console.log(result)
         if(result.acknowledged){
             alert('The recipe added successfully')
+            Shop();
         }
     })
-
-
-
 }
-    // console.log(recipes)
+   
     if(loading){return <p>loading...</p>}
     return (
        <>
@@ -115,9 +109,11 @@ body:JSON.stringify(orderPost)
                     <h2 className="text-xl font-bold">
                         {recipe?.strMeal.slice(0,15)}
                     </h2>
+                   
                     <div className='flex'>
                         <button className="btn btn-primary mx-2"><Link to={`details/${recipe._id}`}>See Details</Link></button>
-                        <button onClick={()=>hanleAdd(recipe._id)} className="btn btn-primary">Add to cart</button>
+                        <button onClick={()=>handleAdd(recipe._id)} className="btn btn-primary">Add to cart</button>
+                        {/* <Add></Add> */}
                     </div>
                 </div>
             </div>)}

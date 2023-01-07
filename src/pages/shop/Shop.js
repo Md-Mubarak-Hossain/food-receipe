@@ -5,9 +5,9 @@ import {RiDeleteBin6Line} from 'react-icons/ri';
 import {AiOutlineEdit} from 'react-icons/ai';
 
 const Shop = () => {
-    const{loading,setShop}=useContext(AuthContext)
+    const{loading,setShop,user}=useContext(AuthContext)
     const [orders,setOrders]=useState([])
-
+    setShop(orders.length)
     useEffect(()=>{
         fetch('https://food-server-three.vercel.app/orders',{
             method:'GET',
@@ -17,11 +17,14 @@ const Shop = () => {
     })
     .then(res=>res.json())
     .then(result=>{
-        setOrders(result)
+        const userOrder=result.filter(order=>order.email===user.email)
+        setOrders(userOrder)
+        orders()
+
     })
 },[])
-setShop(orders.length)
-//  console.log(orders)
+
+
  const handleDelete=(id)=>{
     const proceed=window.confirm('Are you sure delete this recipe???')
     if(proceed){
@@ -62,6 +65,7 @@ if(loading){
                             <img src={order.strMealThumb} alt="" className='w-24 rounded'/>
                         </div>
                         <h2 className='text-xl text-white'>{order.strMeal}</h2>
+                        <h2 className='text-xl text-white'>{order.email}</h2>
                     </div>
                    <div className='w-full'>
                         <div className='w-32 h-32 rounded-full bg-red-200 flex flex-col justify-center items-center place-items-center'>

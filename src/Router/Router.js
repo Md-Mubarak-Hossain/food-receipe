@@ -11,6 +11,7 @@ import Shop from '../pages/shop/Shop';
 import Edit from '../pages/shop/Edit';
 import Recipes from '../pages/Home/Recipes';
 import Demo from '../components/Demo/Demo';
+import Add from '../pages/Home/Add';
 const Router = () => {
     const router = createBrowserRouter([
         {
@@ -42,8 +43,14 @@ const Router = () => {
 
                 },
                 {
+                    path: '/add',
+                    element: <Protect><Add></Add></Protect>,
+                    loader: () => fetch('https://food-server-three.vercel.app/recipes')
+
+                },
+                {
                     path: '/details/:id',
-                    element: <Details></Details>,
+                    element: <Protect><Details></Details></Protect>,
                     loader: ({ params }) => fetch(`https://food-server-three.vercel.app/recipes/${params.id}`)
                 },
                 {

@@ -24,7 +24,7 @@ setMatched(p)
         <div>
             <form onSubmit={handleSub}>
                 <input type="text" className='border'name='search'placeholder='enter food' />
-                <button className='btn btn-primary'>search</button>
+                <button className='btn bg-blue-900'>search</button>
             </form>
         </div>
     );

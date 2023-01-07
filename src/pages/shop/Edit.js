@@ -82,7 +82,7 @@ const Edit = () => {
                 </div>
             </div>
             <div className="form-control mt-6">
-            <button className="btn btn-primary uppercase">Update</button>
+            <button className="btn bg-blue-900 uppercase">Update</button>
         </div>
     </div>
 </form>

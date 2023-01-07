@@ -5,7 +5,7 @@ import Shop from '../shop/Shop';
 
 
 const Recipes = () => {
-    const{loading,user}=useContext(AuthContext)
+    const{loading,user,shop}=useContext(AuthContext)
     const[recipes,setRecipes]=useState([])
     const[recipe,setRecipe]=useState([])
 
@@ -39,7 +39,9 @@ const handleAdd=(id)=>{
         .then(result=>{
             setRecipe(result)
         })
-      
+      if(!(user && user.uid)){
+            return alert('Please login sir for add recipes')
+        }
     const email=user.email;
     const strMeal=recipe.strMeal;
     const strMealThumb=recipe.strMealThumb;
@@ -82,10 +84,11 @@ const handleAdd=(id)=>{
         if(result.acknowledged){
             alert('The recipe added successfully')
             Shop();
+            shop();
         }
     })
 }
-   
+//    shop()
     if(loading){return <p>loading...</p>}
     return (
        <>
@@ -97,7 +100,7 @@ const handleAdd=(id)=>{
                  <div className='flex place-items-center'>
                  <input type="text" placeholder="Type here" className="input input-bordered w-full mx-0" name='search' />
                 <label className="label mx-0">
-                <button className="btn btn-active btn-primary mx-0">search</button>
+                <button className="btn btn-active bg-blue-900 mx-0">search</button>
                 </label>
                  </div>
             </form>
@@ -110,10 +113,9 @@ const handleAdd=(id)=>{
                         {recipe?.strMeal.slice(0,15)}
                     </h2>
                    
-                    <div className='flex'>
-                        <button className="btn btn-primary mx-2"><Link to={`details/${recipe._id}`}>See Details</Link></button>
-                        <button onClick={()=>handleAdd(recipe._id)} className="btn btn-primary">Add to cart</button>
-                        {/* <Add></Add> */}
+                    <div className='flex py-4'>
+                        <button className="btn btn-sm text-sm bg-blue-900 mx-1 uppercase"><Link to={`details/${recipe._id}`}>See Details</Link></button>
+                        <button onClick={()=>handleAdd(recipe._id)} className="btn btn-sm text-sm bg-blue-900 mx-1 uppercase">Add to cart</button>
                     </div>
                 </div>
             </div>)}

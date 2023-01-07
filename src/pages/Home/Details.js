@@ -38,8 +38,8 @@ const Details = () => {
                         <p className='m-1'>6:{recipe.strIngredient6}</p>
                     </div>     
                     <div className="card-actions flex pt-5">
-                            <button onClick={()=>setShop(shop+1)} className="btn btn-primary mx-2">Add to cart</button>
-                            <button className="btn btn-primary">Order Now</button>
+                            <button onClick={()=>setShop(shop+1)} className="btn bg-blue-900 mx-2">Add to cart</button>
+                            <button className="btn bg-blue-900">Order Now</button>
                     </div>
             </div>
           </div>

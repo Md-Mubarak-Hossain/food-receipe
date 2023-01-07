@@ -70,7 +70,7 @@ const handleAdd=(id)=>{
     if(loading){return <p>loading...</p>}
     return (
        <>
-         <button onClick={()=>handleAdd(recipe._id)} className="btn btn-primary">Add to cart</button>
+         <button onClick={()=>handleAdd(recipe._id)} className="btn bg-blue-900">Add to cart</button>
        </>
     );
 };

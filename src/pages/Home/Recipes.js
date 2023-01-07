@@ -5,7 +5,7 @@ const Recipes = () => {
     const{loading}=useContext(AuthContext)
     const[recipes,setRecipes]=useState([])
     const[recipe,setRecipe]=useState([])
-   
+    // const[matched,setMatched]=useState(recipes)
     useEffect(()=>{
         fetch('https://food-server-three.vercel.app/recipes')
         .then(res=>res.json())
@@ -15,6 +15,29 @@ const Recipes = () => {
         })
       
     },[])
+
+    
+console.log(recipes,recipes.length)
+
+
+const handleSub=(e)=>{
+e.preventDefault()
+let search=e.target.search.value;
+
+    fetch('https://food-server-three.vercel.app/recipes')
+    .then(res=>res.json())
+    .then(result=>{
+        setRecipes(result)
+        const p=result.filter(p=>p.strMeal.toLowerCase().includes(search.toLowerCase()))
+        console.log(p)
+        setRecipes(p)
+        recipes();
+        
+        console.log(search)
+    })
+  
+
+}
 const hanleAdd=(id)=>{
         fetch(`https://food-server-three.vercel.app/recipes/${id}`)
         .then(res=>res.json())
@@ -73,17 +96,17 @@ body:JSON.stringify(orderPost)
     return (
        <>
         <div className='flex flex-col justify-center items-center place-items-center'>
-            <div className="form-control w-full lg:w-2/3 my-5 py-5">
+            <form onSubmit={handleSub} className="form-control w-full lg:w-2/3 my-5 py-5">
                 <label className="label">
                     <span className="label-text">Enter recipes or food name here</span>
                 </label>
                  <div className='flex place-items-center'>
-                 <input type="text" placeholder="Type here" className="input input-bordered w-full mx-0" />
+                 <input type="text" placeholder="Type here" className="input input-bordered w-full mx-0" name='search' />
                 <label className="label mx-0">
                 <button className="btn btn-active btn-primary mx-0">search</button>
                 </label>
                  </div>
-            </div>
+            </form>
         </div>
         <div className='grid grid-cols-4 gap-4 w-full'>
             { recipes.map(recipe=><div key={recipe._id} className="hover:shadow-2xl shadow-violet-800 p-5 hover:p-0">

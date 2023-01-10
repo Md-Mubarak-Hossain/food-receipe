@@ -110,7 +110,7 @@ const handleAdd=(id)=>{
                 <img src={recipe.strMealThumb} alt="" className='p-3'/>
                 <div className="p-1">
                     <h2 className="text-xl font-bold">
-                        {recipe?.strMeal.slice(0,15)}
+                        {recipe?.strMeal}
                     </h2>
                    
                     <div className='flex py-4'>

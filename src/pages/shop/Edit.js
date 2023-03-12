@@ -46,7 +46,7 @@ const Edit = () => {
             <figure><img src={strMealThumb} alt="" className='w-full rounded-xl'/></figure>
           </div> 
           <form onSubmit={handleSub} className="flex-shrink-0 w-full">
-            <h2 className='uppercase text-xl font-bold'>Update your Recipe</h2>
+            <h2 className='uppercase text-lg mt-3 font-bold'>Update your Recipe</h2>
             <div className="card-body">
                 <div className="form-control">
                     <label className="label">
@@ -66,8 +66,8 @@ const Edit = () => {
                     </label>
                         <input type="text" name='strMeal' onChange={onChangeHandle} placeholder={strMeal} className="input input-bordered" />
             </div>
-            <h2>Ingredients</h2>
-            <div className='grid grid-cols-2 gap-2'>
+            <h2 className='mt-2'>Ingredients</h2>
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-2'>
                 <div className="form-control">
                         <input type="text" onChange={onChangeHandle} defaultValue={strIngredient1} name='strIngredient1' className="input input-bordered" />
                 </div>

@@ -105,19 +105,28 @@ const handleAdd=(id)=>{
                  </div>
             </form>
         </div>
-        <div className='grid grid-cols-4 gap-4 w-full'>
-            { recipes.map(recipe=><div key={recipe._id} className="hover:shadow-2xl shadow-violet-800 p-5 hover:p-0">
+        <div className='grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-4 xxl:grid-cols-4 md:grid-cols-2 gap-3 w-full'>
+            { recipes.map(recipe=><div key={recipe._id} className="hover:shadow-2xl shadow-violet-800 lg:p-2 hover:p-0">
+            {
+                recipe.strMealThumb?
+                <>
                 <img src={recipe.strMealThumb} alt="" className='p-3'/>
                 <div className="p-1">
-                    <h2 className="text-xl font-bold">
+                    <h2 className="text-lg font-bold">
                         {recipe?.strMeal}
                     </h2>
                    
-                    <div className='flex py-4'>
-                        <button className="btn btn-sm text-sm bg-blue-900 mx-1 uppercase"><Link to={`details/${recipe._id}`}>See Details</Link></button>
-                        <button onClick={()=>handleAdd(recipe._id)} className="btn btn-sm text-sm bg-blue-900 mx-1 uppercase">Add to cart</button>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 xxl:grid-cols-2 md:grid-cols-2 py-4'>
+                        <button className="btn btn-sm text-sm bg-blue-900 m-1 uppercase"><Link to={`details/${recipe._id}`}>See Details</Link></button>
+                        <button onClick={()=>handleAdd(recipe._id)} className="btn btn-sm text-sm bg-blue-900 m-1 uppercase">Add to cart</button>
                     </div>
                 </div>
+                </>
+                :
+                <>
+                
+                </>
+            }
             </div>)}
         </div>
        </>
